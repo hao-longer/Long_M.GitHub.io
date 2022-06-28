@@ -34,7 +34,17 @@
 
 2. const_cast
 
-   const_cast只能用于改变运算对象的底层const，只有const_cast能改变表达式的常量属性
+   const_cast只能用于改变运算对象的底层const，只有const_cast能改变表达式的常量属性。
+   用于函数重载时，将一个返回const的函数，使用const_cast去掉其常量特性。
+	```
+	const string &compare(const string &s1, const string &s2){
+		...
+		return XX;
+	}
+	string &compare(string &s1, string &s2){
+		auto &r = compare(s1, s2);
+		return const_cast<string &>(r);
+	}
 
 3. reinterpret_cast
 
